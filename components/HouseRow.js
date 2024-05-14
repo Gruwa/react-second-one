@@ -1,9 +1,13 @@
 import currencyFormatter from "@/helpers/currencyFormatter";
+import {useContext} from "react";
+import {navigationContext} from "@/components/app";
+import navValues from "@/helpers/navValues";
 
 const HouseRow = ({house}) => {
+    const {navigate} = useContext(navigationContext);
 
-    return(
-        <tr>
+    return (
+        <tr onClick={() => navigate(navValues.house, house)}>
             <td>{house.address}</td>
             <td>{house.country}</td>
             {house.price > 50000 && (

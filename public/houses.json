@@ -1,8 +1,10 @@
 [
   {
-    "id": 1, "address": "12 ASD", "country": "US", "price": 90000
+    "id": 1, "address": "12 ASD", "country": "US", "price": 90000,
+    "photo": 259600
   },
   {
-    "id": 2, "address": "13 ASD", "country": "UK", "price": 1290000
+    "id": 2, "address": "13 ASD", "country": "UK", "price": 1290000,
+    "photo": 164558
   }
 ]

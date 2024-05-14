@@ -1,5 +1,7 @@
 import HouseRow from "@/components/HouseRow";
-import {useEffect, useState} from "react";
+import useHooks from "@/hooks/useHooks";
+import loadingStatus from "@/helpers/loadingStatus";
+import LoadingIndicator from "@/components/loadingIndicator";
 
 // const houseArray = [
 //     {
@@ -10,31 +12,33 @@ import {useEffect, useState} from "react";
 //     }
 // ]
 const HouseList = () => {
-    const [houses, setHouses] = useState([]);
 
-    useEffect(() => {
-        const fetchHouses = async () => {
-            const res = await fetch("./houses.json");
-            const data = await res.json();
+    const {houses, setHouses, loadingState, setLoadingState} = useHooks()
 
-            setHouses(data);
-        };
-
-        fetchHouses();
-    }, []);
+    if (loadingState !== loadingStatus.loaded) {
+        return <LoadingIndicator loadingState={loadingState} />
+    }
 
     const addHouse = () => {
-        setHouses(
-            [
-                ...houses,
-                {
-                    id: houses.length + 1,
-                    address: (houses.length + 13) + " ASD",
-                    country: "EU",
-                    price: 13000 * houses.length
-                }
-            ]
-        )
+        setLoadingState(loadingStatus.isLoading);
+
+        setTimeout(() => {
+            setHouses(
+                [
+                    ...houses,
+                    {
+                        id: houses.length + 1,
+                        address: (houses.length + 13) + " ASD",
+                        country: "EU",
+                        price: 13000 * houses.length,
+                        photo: 277667
+                    }
+                ]
+            )
+            setLoadingState(loadingStatus.loaded);
+        }, 1000);
+
+
     };
 
     return (<>
